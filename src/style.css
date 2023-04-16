@@ -28,6 +28,45 @@ body {
     opacity: 0;
     display: none;
 }
+
+/* mouse */
+
+.circle {
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    border: 3px dotted cadetblue;
+    border-radius: 50%;
+    will-change: transform;
+    opacity: 0;
+    transition: transform 50ms ease-in-out;
+}
+
+.dot {
+    width: 0px;
+    height: 0px;
+    /* background-color: tomato; */
+    /* border-radius: 50%; */
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid cadetblue;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hide {
+    opacity: 0;
+}
+.show {
+    opacity: 1;
+}
+
+
 /* loader */
 #loader {
     position: absolute;

@@ -215,6 +215,62 @@ previousBtn.addEventListener('click', () => {
 
 
 /**
+ *  Mouse mover
+ */
+
+function lerp(start, end, amount) {
+    return (1 - amount) * start + amount * end;
+  }
+  
+//   document.documentElement.style.cursor = 'none';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    let mouseX = 0;
+    let mouseY = 0;
+    let circleX = 0.0;
+    let circleY = 0.0;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    let distance = 0;
+    let scaleDowner = 7; // less no. = more scalled downed
+  
+    const circle = document.querySelector('.circle');
+  
+    const easeAmount = 0.1;
+  
+    function animate() {
+      const targetX = mouseX - window.innerWidth / 2;
+      const targetY = mouseY - window.innerHeight / 2;
+  
+      circleX = lerp(circleX, targetX, easeAmount).toFixed(6);
+      circleY = lerp(circleY, targetY, easeAmount).toFixed(6);
+  
+      circle.style.transform = `translate(calc(${circleX}px - 50%), calc(${circleY}px - 50%)) scale(${1 + distance / 100})`;
+  
+      distance *= 0.9;
+  
+      requestAnimationFrame(animate);
+    }
+  
+    document.addEventListener('mousemove', (event) => {
+      circle.style.opacity = '1';
+  
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+  
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+  
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      distance -= Math.sqrt(dx * dx + dy * dy)/scaleDowner;
+    });
+  
+    animate();
+  });
+  
+
+/**
  * Animate
  */
 const clock = new THREE.Clock()
